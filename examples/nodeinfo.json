@@ -1,0 +1,456 @@
+  {
+    "f025d571a5ea": {
+      "biosversion": "VirtualBox",
+      "kernel": "Linux",
+      "domain": "",
+      "uid": 0,
+      "zmqversion": "4.1.4",
+      "kernelrelease": "4.4.24-boot2docker",
+      "locale_info": {
+        "detectedencoding": "ANSI_X3.4-1968",
+        "defaultlanguage": null,
+        "defaultencoding": null
+      },
+      "pythonpath": [
+        "/usr/bin",
+        "/usr/lib/python2.7",
+        "/usr/lib/python2.7/plat-x86_64-linux-gnu",
+        "/usr/lib/python2.7/lib-tk",
+        "/usr/lib/python2.7/lib-old",
+        "/usr/lib/python2.7/lib-dynload",
+        "/usr/local/lib/python2.7/dist-packages",
+        "/usr/lib/python2.7/dist-packages"
+      ],
+      "pid": 6755,
+      "ip_interfaces": {
+        "lo": [
+          "127.0.0.1",
+          "::1"
+        ],
+        "eth0": [
+          "172.17.0.5",
+          "fe80::42:acff:fe11:5"
+        ]
+      },
+      "groupname": "root",
+      "shell": "/bin/bash",
+      "mem_total": 995,
+      "saltversioninfo": [
+        2016,
+        11,
+        1,
+        0
+      ],
+      "osmajorrelease": "16",
+      "SSDs": [
+        "zram0"
+      ],
+      "id": "f025d571a5ea",
+      "osrelease": "16.04",
+      "ps": "ps -efHww",
+      "server_id": 166673532,
+      "uuid": "c1f3d4b1-4a09-42f1-8a2e-f92ee7197d4a",
+      "ip6_interfaces": {
+        "lo": [
+          "::1"
+        ],
+        "eth0": [
+          "fe80::42:acff:fe11:5"
+        ]
+      },
+      "num_cpus": 1,
+      "hwaddr_interfaces": {
+        "lo": "00:00:00:00:00:00",
+        "eth0": "02:42:ac:11:00:05"
+      },
+      "init": "unknown",
+      "ip4_interfaces": {
+        "lo": [
+          "127.0.0.1"
+        ],
+        "eth0": [
+          "172.17.0.5"
+        ]
+      },
+      "lsb_distrib_description": "Ubuntu 16.04.1 LTS",
+      "osfullname": "Ubuntu",
+      "gid": 0,
+      "master": "172.17.0.4",
+      "virtual_subtype": "Docker",
+      "dns": {
+        "domain": "",
+        "sortlist": [
+
+        ],
+        "nameservers": [
+          "10.0.2.3"
+        ],
+        "ip4_nameservers": [
+          "10.0.2.3"
+        ],
+        "search": [
+
+        ],
+        "ip6_nameservers": [
+
+        ],
+        "options": [
+
+        ]
+      },
+      "ipv6": [
+        "::1",
+        "fe80::42:acff:fe11:5"
+      ],
+      "cpu_flags": [
+        "fpu",
+        "vme",
+        "de",
+        "pse",
+        "tsc",
+        "msr",
+        "pae",
+        "mce",
+        "cx8",
+        "apic",
+        "sep",
+        "mtrr",
+        "pge",
+        "mca",
+        "cmov",
+        "pat",
+        "pse36",
+        "clflush",
+        "mmx",
+        "fxsr",
+        "sse",
+        "sse2",
+        "syscall",
+        "nx",
+        "rdtscp",
+        "lm",
+        "constant_tsc",
+        "rep_good",
+        "nopl",
+        "xtopology",
+        "nonstop_tsc",
+        "pni",
+        "pclmulqdq",
+        "monitor",
+        "ssse3",
+        "cx16",
+        "sse4_1",
+        "sse4_2",
+        "movbe",
+        "popcnt",
+        "aes",
+        "xsave",
+        "avx",
+        "rdrand",
+        "hypervisor",
+        "lahf_lm",
+        "abm"
+      ],
+      "localhost": "f025d571a5ea",
+      "ipv4": [
+        "127.0.0.1",
+        "172.17.0.5"
+      ],
+      "username": "root",
+      "fqdn_ip4": [
+        "172.17.0.5"
+      ],
+      "saltpath": "/usr/lib/python2.7/dist-packages/salt",
+      "fqdn_ip6": [
+
+      ],
+      "nodename": "f025d571a5ea",
+      "saltversion": "2016.11.1",
+      "lsb_distrib_release": "16.04",
+      "cpu_model": "Intel(R) Core(TM) i5-4260U CPU @ 1.40GHz",
+      "biosreleasedate": "12/01/2006",
+      "host": "f025d571a5ea",
+      "os_family": "Debian",
+      "oscodename": "xenial",
+      "osfinger": "Ubuntu-16.04",
+      "pythonversion": [
+        2,
+        7,
+        12,
+        "final",
+        0
+      ],
+      "manufacturer": "innotek GmbH",
+      "num_gpus": 0,
+      "virtual": "VirtualBox",
+      "disks": [
+        "sda",
+        "sr0",
+        "ram0",
+        "ram1",
+        "ram2",
+        "ram3",
+        "ram4",
+        "ram5",
+        "ram6",
+        "ram7",
+        "loop0",
+        "loop1",
+        "loop2",
+        "loop3",
+        "loop4",
+        "loop5",
+        "loop6",
+        "loop7"
+      ],
+      "systemd": {
+        "version": "229",
+        "features": "+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ -LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD -IDN"
+      },
+      "fqdn": "f025d571a5ea",
+      "pythonexecutable": "/usr/bin/python",
+      "productname": "VirtualBox",
+      "osarch": "amd64",
+      "cpuarch": "x86_64",
+      "lsb_distrib_codename": "xenial",
+      "osrelease_info": [
+        16,
+        4
+      ],
+      "lsb_distrib_id": "Ubuntu",
+      "gpus": [
+
+      ],
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games",
+      "machine_id": "",
+      "os": "Ubuntu"
+    },
+    "e63c048bb3b3": {
+      "biosversion": "VirtualBox",
+      "kernel": "Linux",
+      "domain": "",
+      "uid": 0,
+      "zmqversion": "4.1.4",
+      "kernelrelease": "4.4.24-boot2docker",
+      "locale_info": {
+        "detectedencoding": "ANSI_X3.4-1968",
+        "defaultlanguage": null,
+        "defaultencoding": null
+      },
+      "pythonpath": [
+        "/usr/lib/python2.7/dist-packages/git/ext/gitdb",
+        "/usr/bin",
+        "/usr/lib/python2.7",
+        "/usr/lib/python2.7/plat-x86_64-linux-gnu",
+        "/usr/lib/python2.7/lib-tk",
+        "/usr/lib/python2.7/lib-old",
+        "/usr/lib/python2.7/lib-dynload",
+        "/usr/local/lib/python2.7/dist-packages",
+        "/usr/lib/python2.7/dist-packages",
+        "/usr/lib/python2.7/dist-packages/gitdb/ext/smmap"
+      ],
+      "pid": 6618,
+      "ip_interfaces": {
+        "lo": [
+          "127.0.0.1",
+          "::1"
+        ],
+        "eth0": [
+          "172.17.0.3",
+          "fe80::42:acff:fe11:3"
+        ]
+      },
+      "groupname": "root",
+      "shell": "/bin/bash",
+      "mem_total": 995,
+      "saltversioninfo": [
+        2016,
+        11,
+        1,
+        0
+      ],
+      "osmajorrelease": "16",
+      "SSDs": [
+        "zram0"
+      ],
+      "id": "e63c048bb3b3",
+      "osrelease": "16.04",
+      "ps": "ps -efHww",
+      "server_id": 801130341,
+      "uuid": "c1f3d4b1-4a09-42f1-8a2e-f92ee7197d4a",
+      "ip6_interfaces": {
+        "lo": [
+          "::1"
+        ],
+        "eth0": [
+          "fe80::42:acff:fe11:3"
+        ]
+      },
+      "num_cpus": 1,
+      "hwaddr_interfaces": {
+        "lo": "00:00:00:00:00:00",
+        "eth0": "02:42:ac:11:00:03"
+      },
+      "init": "unknown",
+      "ip4_interfaces": {
+        "lo": [
+          "127.0.0.1"
+        ],
+        "eth0": [
+          "172.17.0.3"
+        ]
+      },
+      "lsb_distrib_description": "Ubuntu 16.04.1 LTS",
+      "osfullname": "Ubuntu",
+      "gid": 0,
+      "master": "172.17.0.4",
+      "virtual_subtype": "Docker",
+      "dns": {
+        "domain": "",
+        "sortlist": [
+
+        ],
+        "nameservers": [
+          "10.0.2.3"
+        ],
+        "ip4_nameservers": [
+          "10.0.2.3"
+        ],
+        "search": [
+
+        ],
+        "ip6_nameservers": [
+
+        ],
+        "options": [
+
+        ]
+      },
+      "ipv6": [
+        "::1",
+        "fe80::42:acff:fe11:3"
+      ],
+      "cpu_flags": [
+        "fpu",
+        "vme",
+        "de",
+        "pse",
+        "tsc",
+        "msr",
+        "pae",
+        "mce",
+        "cx8",
+        "apic",
+        "sep",
+        "mtrr",
+        "pge",
+        "mca",
+        "cmov",
+        "pat",
+        "pse36",
+        "clflush",
+        "mmx",
+        "fxsr",
+        "sse",
+        "sse2",
+        "syscall",
+        "nx",
+        "rdtscp",
+        "lm",
+        "constant_tsc",
+        "rep_good",
+        "nopl",
+        "xtopology",
+        "nonstop_tsc",
+        "pni",
+        "pclmulqdq",
+        "monitor",
+        "ssse3",
+        "cx16",
+        "sse4_1",
+        "sse4_2",
+        "movbe",
+        "popcnt",
+        "aes",
+        "xsave",
+        "avx",
+        "rdrand",
+        "hypervisor",
+        "lahf_lm",
+        "abm"
+      ],
+      "localhost": "e63c048bb3b3",
+      "ipv4": [
+        "127.0.0.1",
+        "172.17.0.3"
+      ],
+      "username": "root",
+      "fqdn_ip4": [
+        "172.17.0.3"
+      ],
+      "saltpath": "/usr/lib/python2.7/dist-packages/salt",
+      "fqdn_ip6": [
+
+      ],
+      "nodename": "e63c048bb3b3",
+      "saltversion": "2016.11.1",
+      "lsb_distrib_release": "16.04",
+      "cpu_model": "Intel(R) Core(TM) i5-4260U CPU @ 1.40GHz",
+      "biosreleasedate": "12/01/2006",
+      "host": "e63c048bb3b3",
+      "os_family": "Debian",
+      "oscodename": "xenial",
+      "osfinger": "Ubuntu-16.04",
+      "pythonversion": [
+        2,
+        7,
+        12,
+        "final",
+        0
+      ],
+      "manufacturer": "innotek GmbH",
+      "num_gpus": 0,
+      "virtual": "VirtualBox",
+      "disks": [
+        "sda",
+        "sr0",
+        "ram0",
+        "ram1",
+        "ram2",
+        "ram3",
+        "ram4",
+        "ram5",
+        "ram6",
+        "ram7",
+        "loop0",
+        "loop1",
+        "loop2",
+        "loop3",
+        "loop4",
+        "loop5",
+        "loop6",
+        "loop7"
+      ],
+      "systemd": {
+        "version": "229",
+        "features": "+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ -LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD -IDN"
+      },
+      "fqdn": "e63c048bb3b3",
+      "pythonexecutable": "/usr/bin/python",
+      "productname": "VirtualBox",
+      "osarch": "amd64",
+      "cpuarch": "x86_64",
+      "lsb_distrib_codename": "xenial",
+      "osrelease_info": [
+        16,
+        4
+      ],
+      "lsb_distrib_id": "Ubuntu",
+      "gpus": [
+
+      ],
+      "path": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin",
+      "machine_id": "",
+      "os": "Ubuntu"
+    }
+  }

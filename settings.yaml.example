@@ -1,0 +1,20 @@
+# ========= Device 42
+
+device42:
+    host: host
+    user: user
+    pass: pass
+
+
+# ========= Options
+
+# static options
+static:
+    customer: null
+    customer_id: null
+    service_level: null
+
+options:
+    # as_node_name: one of [fqdn, name]
+    as_node_name: fqdn
+    node_filter: []
