@@ -7,7 +7,7 @@ Take the file `settings.yaml.example` and rename it to `settings.yaml`. Then cha
 
 # Salt Configure
 For proper connection minions certificate should be signed on salt master.
-Script should be runned on salt master server.
+Script should be run on salt master server.
 See [NodeFilter.md](./NodeFilter.md) for node filtering options.
 
 # Run
