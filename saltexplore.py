@@ -121,6 +121,9 @@ def d42_insert(dev42, nodes, options, static_opt):
                 'service_level': static_opt.get('service_level'),
             }
 
+            if options.get('hostname_precedence'):
+                data.update({'new_name': node_name})
+
             logger.debug("Updating node %s" % node_name)
             updateinfo = dev42.update_device(**data)
             deviceid = updateinfo['msg'][1]
