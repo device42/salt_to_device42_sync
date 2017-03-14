@@ -87,16 +87,14 @@ def d42_insert(dev42, nodes, options, static_opt):
             totalmem = int(float(node['mem_total']))
 
             nodetype = None
+            virtual_subtype = None
             if node['virtual'] is not None:
                 is_virtual = 'yes'
                 nodetype = 'virtual'
-                try:
+                if 'virtual_subtype' in node:
                     virtual_subtype = node['virtual_subtype']
-                except KeyError:
-                    virtual_subtype = None
             else:
                 is_virtual = 'no'
-                virtual_subtype = None
 
             cpupower = 0
             cpucores = node['num_cpus']
