@@ -86,14 +86,14 @@ def d42_insert(dev42, nodes, options, static_opt):
             # detect memory
             totalmem = int(float(node['mem_total']))
 
-            # detect HDD
-            hddcount = len(node['disks'])
-
             nodetype = None
             if node['virtual'] is not None:
                 is_virtual = 'yes'
                 nodetype = 'virtual'
-                virtual_subtype = node['virtual_subtype']
+                try:
+                    virtual_subtype = node['virtual_subtype']
+                except KeyError:
+                    virtual_subtype = None
             else:
                 is_virtual = 'no'
                 virtual_subtype = None
@@ -115,11 +115,14 @@ def d42_insert(dev42, nodes, options, static_opt):
 
                 'memory': totalmem,
                 'cpucore': cpucores,
-                'hddcount': hddcount,
                 'manufacturer': node['manufacturer'],
                 'customer': customer_name,
                 'service_level': static_opt.get('service_level'),
             }
+
+            # detect HDD
+            if 'disks' in node:
+                data.update({'hddcount': len(node['disks'])})
 
             if options.get('hostname_precedence'):
                 data.update({'new_name': node_name})
@@ -177,8 +180,8 @@ def d42_insert(dev42, nodes, options, static_opt):
                         dev42._delete('ips/%s' % d_ip['id'])
                         logger.debug("Deleted IP %s (id %s) for device %s (id %s)" %
                                      (d_ip['ip'], d_ip['id'], node_name, deviceid))
-        except Exception as eee:
-            logger.exception("Error(%s) updating device %s" % (type(eee), node_name))
+        except Exception as e:
+            logger.exception("Error (%s) updating device %s" % (type(e), node_name))
 
 
 def main():
