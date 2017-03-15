@@ -158,7 +158,7 @@ def d42_insert(dev42, nodes, options, static_opt):
                         if disk['filesystem'] in node['disks'][node['id']]:
                             hdd_size += int(disk['1K-blocks'])
 
-                    data.update({'hddcount': hdd_count, 'hddsize': (hdd_size / 1024) / 1024})
+                    data.update({'hddcount': hdd_count, 'hddsize': hdd_size / (1024 * 1024)})
 
             if 'cpus' in node:
                 if type(node['cpus']) == dict:
