@@ -88,13 +88,12 @@ def d42_insert(dev42, nodes, options, static_opt):
 
             nodetype = None
             virtual_subtype = None
-            if node['virtual'] is not None:
+            is_virtual = 'no'
+            if 'virtual' in node and node['virtual'] is not None:
                 is_virtual = 'yes'
                 nodetype = 'virtual'
                 if 'virtual_subtype' in node:
                     virtual_subtype = node['virtual_subtype']
-            else:
-                is_virtual = 'no'
 
             cpupower = 0
             cpucores = node['num_cpus']
