@@ -32,6 +32,11 @@ parser.add_argument('-n', '--onlynode', action='append', help='Process only sele
 debug_mode = False
 cpuf_re = re.compile(r'@ ([\w\d\.]+)GHz', re.I)
 
+# We have to restrict FS to only known types to avoid incorrect disk size calculatons
+# add more yourself
+ALLOWED_FSTYPES = ['ntfs', 'ext2', 'ext3', 'ext4', 'ocfs2', 'xfs', 'zfs', 'jfs',
+                   'vfat', 'msdos', 'reiser4', 'reiserfs']
+
 
 def get_config(cfgpath):
     if not os.path.exists(cfgpath):
@@ -85,6 +90,25 @@ def d42_insert(dev42, nodes, options, static_opt):
             # device = dev42.get_device_by_name(node_name)
             # detect memory
             totalmem = int(float(node['mem_total']))
+            cpupower = 0
+            cpus = node['num_cpus']
+            cpupowers = cpuf_re.findall(node['cpu_model'])
+            if cpupowers:
+                cpupower = int(float(cpupowers[0]) * 1000)
+
+            data = {
+                'name': node_name,
+                'os': node['os'],
+                'osver': node['osrelease'],
+                'osarch': node['osarch'],
+                'cpupower': cpupower,
+                'memory': totalmem,
+                'cpucore': cpus,
+                'manufacturer': node['manufacturer'],
+                'customer': customer_name,
+                'service_level': static_opt.get('service_level'),
+                'uuid': node['machine_id']
+            }
 
             nodetype = None
             virtual_subtype = None
@@ -95,31 +119,45 @@ def d42_insert(dev42, nodes, options, static_opt):
                 if 'virtual_subtype' in node:
                     virtual_subtype = node['virtual_subtype']
 
-            cpupower = 0
-            cpucores = node['num_cpus']
-            cpupowers = cpuf_re.findall(node['cpu_model'])
-            if cpupowers:
-                cpupower = int(float(cpupowers[0]) * 1000)
+            if virtual_subtype is not None:
+                data.update({'virtual_subtype': virtual_subtype})
 
-            data = {
-                'name': node_name,
+            data.update({
                 'type': nodetype,
-                'is_it_virtual_host': is_virtual,
-                'virtual_subtype': virtual_subtype,
-                'os': node['os'],
-                'osver': node['osrelease'],
-                'cpupower': cpupower,
+                'is_it_virtual_host': is_virtual
+            })
 
-                'memory': totalmem,
-                'cpucore': cpucores,
-                'manufacturer': node['manufacturer'],
-                'customer': customer_name,
-                'service_level': static_opt.get('service_level'),
-            }
+            osarch = None
+            if '64' in node['osarch']:
+                osarch = 64
+            if '32' in node['osarch']:
+                osarch = 32
 
-            # detect HDD
+            if osarch is not None:
+                data.update({'osarch': osarch})
+
+            # detect disks
             if 'disks' in node:
-                data.update({'hddcount': len(node['disks'])})
+                hdd_count = 0
+                hdd_size = 0
+                disks = {}
+
+                # get unique
+                for disk in node['disks'][node['id']]:
+                    disk = node['disks'][node['id']][disk]
+                    if disk['UUID'] not in disks:
+                        disks[disk['UUID']] = disk
+
+                for disk in disks:
+                    if disks[disk]['TYPE'].lower() in ALLOWED_FSTYPES:
+                        hdd_count += 1
+
+                for disk in node['usage'][node['id']]:
+                    disk = node['usage'][node['id']][disk]
+                    if disk['filesystem'] in node['disks'][node['id']]:
+                        hdd_size += int(disk['1K-blocks'])
+
+                data.update({'hddcount': hdd_count, 'hddsize': (hdd_size / 1024) / 1024})
 
             if options.get('hostname_precedence'):
                 data.update({'new_name': node_name})
@@ -211,6 +249,10 @@ def main():
                 if node.get('nodename') in args.onlynode[0] or node.get('fqdn') in args.onlynode[0]:
                     salt_nodes[key] = node
         logger.debug("Got %s nodes from file" % len(salt_nodes))
+
+    for node in salt_nodes:
+        salt_nodes[node]['disks'] = local.cmd(node, 'disk.blkid')
+        salt_nodes[node]['usage'] = local.cmd(node, 'disk.usage')
 
     if args.savenodes:
         with open(args.savenodes, 'w') as wnf:
