@@ -162,7 +162,7 @@ def d42_insert(dev42, nodes, options, static_opt):
 
             if 'cpus' in node:
                 if type(node['cpus']) == dict:
-                    data.update({'cpucount': node['cpus'][node['id']]['physical id']})
+                    data.update({'cpucount': int(node['cpus'][node['id']]['physical id']) + 1})
 
             if options.get('hostname_precedence'):
                 data.update({'new_name': node_name})
