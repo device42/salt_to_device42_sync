@@ -142,22 +142,23 @@ def d42_insert(dev42, nodes, options, static_opt):
                 hdd_size = 0
                 disks = {}
 
-                # get unique
-                for disk in node['disks'][node['id']]:
-                    disk = node['disks'][node['id']][disk]
-                    if disk['UUID'] not in disks:
-                        disks[disk['UUID']] = disk
+                if type(node['disks']) == dict:
+                    # get unique
+                    for disk in node['disks'][node['id']]:
+                        disk = node['disks'][node['id']][disk]
+                        if disk['UUID'] not in disks:
+                            disks[disk['UUID']] = disk
 
-                for disk in disks:
-                    if disks[disk]['TYPE'].lower() in ALLOWED_FSTYPES:
-                        hdd_count += 1
+                    for disk in disks:
+                        if disks[disk]['TYPE'].lower() in ALLOWED_FSTYPES:
+                            hdd_count += 1
 
-                for disk in node['usage'][node['id']]:
-                    disk = node['usage'][node['id']][disk]
-                    if disk['filesystem'] in node['disks'][node['id']]:
-                        hdd_size += int(disk['1K-blocks'])
+                    for disk in node['usage'][node['id']]:
+                        disk = node['usage'][node['id']][disk]
+                        if disk['filesystem'] in node['disks'][node['id']]:
+                            hdd_size += int(disk['1K-blocks'])
 
-                data.update({'hddcount': hdd_count, 'hddsize': (hdd_size / 1024) / 1024})
+                    data.update({'hddcount': hdd_count, 'hddsize': (hdd_size / 1024) / 1024})
 
             if options.get('hostname_precedence'):
                 data.update({'new_name': node_name})
