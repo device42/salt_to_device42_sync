@@ -160,6 +160,10 @@ def d42_insert(dev42, nodes, options, static_opt):
 
                     data.update({'hddcount': hdd_count, 'hddsize': (hdd_size / 1024) / 1024})
 
+            if 'cpus' in node:
+                if type(node['cpus']) == dict:
+                    data.update({'cpucount': node['cpus'][node['id']]['physical id']})
+
             if options.get('hostname_precedence'):
                 data.update({'new_name': node_name})
 
@@ -254,6 +258,7 @@ def main():
     for node in salt_nodes:
         salt_nodes[node]['disks'] = local.cmd(node, 'disk.blkid')
         salt_nodes[node]['usage'] = local.cmd(node, 'disk.usage')
+        salt_nodes[node]['cpus'] = local.cmd(node, 'status.cpuinfo')
 
     if args.savenodes:
         with open(args.savenodes, 'w') as wnf:
