@@ -100,7 +100,6 @@ def d42_insert(dev42, nodes, options, static_opt):
                 'name': node_name,
                 'os': node['os'],
                 'osver': node['osrelease'],
-                'osarch': node['osarch'],
                 'cpupower': cpupower,
                 'memory': totalmem,
                 'cpucore': cpus,
