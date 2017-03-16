@@ -129,7 +129,7 @@ def d42_insert(dev42, nodes, options, static_opt):
             osarch = None
             if '64' in node['osarch']:
                 osarch = 64
-            if '32' in node['osarch']:
+            if '86' in node['osarch']:
                 osarch = 32
 
             if osarch is not None:
