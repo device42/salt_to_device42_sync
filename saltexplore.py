@@ -142,7 +142,7 @@ def d42_insert(dev42, nodes, options, static_opt):
                 hdd_size = 0
                 disks = {}
 
-                if type(node['disks']) == dict:
+                if type(node['disks'][node['id']]) == dict:
                     # get unique
                     for disk in node['disks'][node['id']]:
                         disk = node['disks'][node['id']][disk]
@@ -161,7 +161,7 @@ def d42_insert(dev42, nodes, options, static_opt):
                     data.update({'hddcount': hdd_count, 'hddsize': float(hdd_size) / (1024 * 1024)})
 
             if 'cpus' in node:
-                if type(node['cpus']) == dict:
+                if type(node['cpus'][node['id']]) == dict:
                     data.update({'cpucount': int(node['cpus'][node['id']]['physical id']) + 1})
 
             if options.get('hostname_precedence'):
