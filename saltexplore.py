@@ -201,6 +201,8 @@ def d42_insert(dev42, nodes, options, static_opt):
                     for ip in ifs:
                         if ip.startswith('127.0'):
                             continue  # local loopbacks
+                        if ip.lower().startswith('fe80'):
+                            continue  # local loopbacks
                         ipdata = {
                             'ipaddress': ip,
                             'tag': ifsname,
