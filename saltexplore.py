@@ -105,9 +105,24 @@ def d42_insert(dev42, nodes, options, static_opt):
                 'cpucore': cpus,
                 'manufacturer': node['manufacturer'],
                 'customer': customer_name,
-                'service_level': static_opt.get('service_level'),
-                'uuid': node['machine_id']
+                'service_level': static_opt.get('service_level')
             }
+
+            uuid = None
+            if 'machine_id' in node:
+                uuid = node['machine_id']
+            if not uuid and 'uuid' in node:
+                uuid = node['uuid']
+            if uuid:
+                data.update({'uuid': uuid})
+
+            serial_no = None
+            if 'serialnumber' in node:
+                serial_no = node['serialnumber']
+            if not serial_no and 'system_serialnumber' in node:
+                seral_no = node['system_serialnumber']
+            if serial_no:
+                data.update({'serial_no': seral_no})
 
             nodetype = None
             virtual_subtype = None
