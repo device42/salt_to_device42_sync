@@ -73,6 +73,9 @@ def d42_insert(dev42, nodes, options, static_opt):
 
     # processing all nodes
     for node in [nodes[x] for x in nodes]:
+        if not node:
+            logger.debug("Skip node: no proper node data")
+            continue 
         if 'nodename' not in node:
             logger.debug("Skip node: no name found")
             continue
