@@ -224,7 +224,7 @@ def d42_insert(dev42, nodes, options, static_opt):
                         ipdata = {
                             'ipaddress': ip,
                             'tag': ifsname,
-                            'device': node_name,
+                            'device_id': deviceid,
                             'macaddress': node.get('hwaddr_interfaces')[ifsname]
                         }
                         # logger.debug("IP data: %s" % ipdata)
