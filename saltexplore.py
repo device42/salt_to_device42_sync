@@ -145,9 +145,9 @@ def d42_insert(dev42, nodes, options, static_opt):
             })
 
             osarch = None
-            if '64' in node['osarch']:
+            if 'osarch' in node and '64' in node['osarch']:
                 osarch = 64
-            if '86' in node['osarch']:
+            if 'osarch' in node and '86' in node['osarch']:
                 osarch = 32
 
             if osarch is not None:
@@ -159,7 +159,7 @@ def d42_insert(dev42, nodes, options, static_opt):
                 hdd_size = 0
                 disks = {}
 
-                if type(node['disks'][node['id']]) == dict:
+                if node['id'] in node['disks'] and type(node['disks'][node['id']]) == dict:
                     # get unique
                     for disk in node['disks'][node['id']]:
                         disk = node['disks'][node['id']][disk]
@@ -203,17 +203,17 @@ def d42_insert(dev42, nodes, options, static_opt):
 
             if node.get('hwaddr_interfaces'):
                 for ifsname, ifs in node.get('hwaddr_interfaces').items():
-                    if ifsname == 'lo':
+                    if ifsname.startswith('lo'):
                         continue
 
                     dev42._put('device', {
-                        'name': node_name,
+                        'device_id': deviceid,
                         'macaddress': ifs
                     })
 
             if node.get('ip_interfaces'):
                 for ifsname, ifs in node.get('ip_interfaces').items():
-                    if ifsname == 'lo':
+                    if ifsname.startswith('lo'):
                         continue  # filter out local interface
 
                     for ip in ifs:
@@ -236,7 +236,7 @@ def d42_insert(dev42, nodes, options, static_opt):
             if updated_ips:
                 for d_ip in device_ips:
                     if d_ip['id'] not in updated_ips:
-                        dev42._delete('ips/%s' % d_ip['id'])
+                        dev42._delete('ips/%s/' % d_ip['id'])
                         logger.debug("Deleted IP %s (id %s) for device %s (id %s)" %
                                      (d_ip['ip'], d_ip['id'], node_name, deviceid))
         except Exception as e:
