@@ -163,17 +163,18 @@ def d42_insert(dev42, nodes, options, static_opt):
                     # get unique
                     for disk in node['disks'][node['id']]:
                         disk = node['disks'][node['id']][disk]
-                        if disk['UUID'] not in disks:
+                        if 'UUID' in disk and disk['UUID'] not in disks:
                             disks[disk['UUID']] = disk
 
                     for disk in disks:
-                        if disks[disk]['TYPE'].lower() in ALLOWED_FSTYPES:
+                        if 'TYPE' in disks[disk] and disks[disk]['TYPE'].lower() in ALLOWED_FSTYPES:
                             hdd_count += 1
 
-                    for disk in node['usage'][node['id']]:
-                        disk = node['usage'][node['id']][disk]
-                        if disk['filesystem'] in node['disks'][node['id']]:
-                            hdd_size += int(disk['1K-blocks'])
+                    if 'usage' in node and node['id'] in node['usage'] and type(node['usage'][node['id']] == dict):
+                        for disk in node['usage'][node['id']]:
+                            disk = node['usage'][node['id']][disk]
+                            if 'filesystem' in disk and disk['filesystem'] in node['disks'][node['id']]:
+                                hdd_size += int(disk['1K-blocks'])
 
                     data.update({'hddcount': hdd_count, 'hddsize': float(hdd_size) / (1024 * 1024)})
 
