@@ -173,7 +173,7 @@ def d42_insert(dev42, nodes, options, static_opt):
                     if 'usage' in node and node['id'] in node['usage'] and type(node['usage'][node['id']] == dict):
                         for disk in node['usage'][node['id']]:
                             disk = node['usage'][node['id']][disk]
-                            if 'filesystem' in disk and disk['filesystem'] in node['disks'][node['id']]:
+                            if 'filesystem' in disk and disk['filesystem'] in node['disks'][node['id']] and '1K-blocks' in disk:
                                 hdd_size += int(disk['1K-blocks'])
 
                     data.update({'hddcount': hdd_count, 'hddsize': float(hdd_size) / (1024 * 1024)})
