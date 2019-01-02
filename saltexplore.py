@@ -145,9 +145,9 @@ def d42_insert(dev42, nodes, options, static_opt):
             })
 
             osarch = None
-            if '64' in node['osarch']:
+            if 'osarch' in node and '64' in node['osarch']:
                 osarch = 64
-            if '86' in node['osarch']:
+            if 'osarch' in node and '86' in node['osarch']:
                 osarch = 32
 
             if osarch is not None:
@@ -159,21 +159,22 @@ def d42_insert(dev42, nodes, options, static_opt):
                 hdd_size = 0
                 disks = {}
 
-                if type(node['disks'][node['id']]) == dict:
+                if node['id'] in node['disks'] and type(node['disks'][node['id']]) == dict:
                     # get unique
                     for disk in node['disks'][node['id']]:
                         disk = node['disks'][node['id']][disk]
-                        if disk['UUID'] not in disks:
+                        if 'UUID' in disk and disk['UUID'] not in disks:
                             disks[disk['UUID']] = disk
 
                     for disk in disks:
-                        if disks[disk]['TYPE'].lower() in ALLOWED_FSTYPES:
+                        if 'TYPE' in disks[disk] and disks[disk]['TYPE'].lower() in ALLOWED_FSTYPES:
                             hdd_count += 1
 
-                    for disk in node['usage'][node['id']]:
-                        disk = node['usage'][node['id']][disk]
-                        if disk['filesystem'] in node['disks'][node['id']]:
-                            hdd_size += int(disk['1K-blocks'])
+                    if 'usage' in node and node['id'] in node['usage'] and type(node['usage'][node['id']] == dict):
+                        for disk in node['usage'][node['id']]:
+                            disk = node['usage'][node['id']][disk]
+                            if 'filesystem' in disk and disk['filesystem'] in node['disks'][node['id']] and '1K-blocks' in disk:
+                                hdd_size += int(disk['1K-blocks'])
 
                     data.update({'hddcount': hdd_count, 'hddsize': float(hdd_size) / (1024 * 1024)})
 
@@ -203,17 +204,17 @@ def d42_insert(dev42, nodes, options, static_opt):
 
             if node.get('hwaddr_interfaces'):
                 for ifsname, ifs in node.get('hwaddr_interfaces').items():
-                    if ifsname == 'lo':
+                    if ifsname.startswith('lo'):
                         continue
 
                     dev42._put('device', {
-                        'name': node_name,
+                        'device_id': deviceid,
                         'macaddress': ifs
                     })
 
             if node.get('ip_interfaces'):
                 for ifsname, ifs in node.get('ip_interfaces').items():
-                    if ifsname == 'lo':
+                    if ifsname.startswith('lo'):
                         continue  # filter out local interface
 
                     for ip in ifs:
@@ -224,7 +225,7 @@ def d42_insert(dev42, nodes, options, static_opt):
                         ipdata = {
                             'ipaddress': ip,
                             'tag': ifsname,
-                            'device': node_name,
+                            'device_id': deviceid,
                             'macaddress': node.get('hwaddr_interfaces')[ifsname]
                         }
                         # logger.debug("IP data: %s" % ipdata)
@@ -236,7 +237,7 @@ def d42_insert(dev42, nodes, options, static_opt):
             if updated_ips:
                 for d_ip in device_ips:
                     if d_ip['id'] not in updated_ips:
-                        dev42._delete('ips/%s' % d_ip['id'])
+                        dev42._delete('ips/%s/' % d_ip['id'])
                         logger.debug("Deleted IP %s (id %s) for device %s (id %s)" %
                                      (d_ip['ip'], d_ip['id'], node_name, deviceid))
         except Exception as e:
