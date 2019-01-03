@@ -214,11 +214,8 @@ def d42_insert(dev42, nodes, options, static_opt):
 
             if node.get('ip_interfaces') and node.get('hwaddr_interfaces'):
                 for ifsname, ifs in node.get('ip_interfaces').items():
-                    if ifsname.startswith('lo'):
-                        continue  # filter out local interface
-
-                    if ifsname.find('tun') != -1:
-                        continue
+                    if ifsname.startswith('lo') or ifsname.startswith('tun') or ifsname.startswith('tap'):
+                        continue  # filter out local and tunnel
 
                     for ip in ifs:
                         if ip.startswith('127.0'):
