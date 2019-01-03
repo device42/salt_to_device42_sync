@@ -214,8 +214,8 @@ def d42_insert(dev42, nodes, options, static_opt):
 
             if node.get('ip_interfaces') and node.get('hwaddr_interfaces'):
                 for ifsname, ifs in node.get('ip_interfaces').items():
-                    if ifsname.startswith('lo'):
-                        continue  # filter out local interface
+                    if ifsname.startswith('lo') or ifsname.startswith('tun') or ifsname.startswith('tap'):
+                        continue  # filter out local and tunnel
 
                     for ip in ifs:
                         if ip.startswith('127.0'):
@@ -278,15 +278,16 @@ def main():
         logger.debug("Got %s nodes from file" % len(salt_nodes))
 
     for node in salt_nodes:
-        if not node:
-            continue 
-        if not isinstance(node, dict):
-            continue
-        if 'nodename' not in node:
-            continue
-        salt_nodes[node]['disks'] = local.cmd(node, 'disk.blkid')
-        salt_nodes[node]['usage'] = local.cmd(node, 'disk.usage')
-        salt_nodes[node]['cpus'] = local.cmd(node, 'status.cpuinfo')
+        try:
+            if not node:
+                continue 
+            if type(salt_nodes[node]) != dict:
+                continue
+            salt_nodes[node]['disks'] = local.cmd(node, 'disk.blkid')
+            salt_nodes[node]['usage'] = local.cmd(node, 'disk.usage')
+            salt_nodes[node]['cpus'] = local.cmd(node, 'status.cpuinfo')
+        except Exception as e:
+            logger.exception("Error (%s) getting device information %s" % (type(e), node))
 
     if args.savenodes:
         with open(args.savenodes, 'w') as wnf:
