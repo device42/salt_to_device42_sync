@@ -217,6 +217,9 @@ def d42_insert(dev42, nodes, options, static_opt):
                     if ifsname.startswith('lo'):
                         continue  # filter out local interface
 
+                    if ifsname.find('tun') != -1:
+                        continue
+
                     for ip in ifs:
                         if ip.startswith('127.0'):
                             continue  # local loopbacks
