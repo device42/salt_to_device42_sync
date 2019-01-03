@@ -212,7 +212,7 @@ def d42_insert(dev42, nodes, options, static_opt):
                         'macaddress': ifs
                     })
 
-            if node.get('ip_interfaces'):
+            if node.get('ip_interfaces') and node.get('hwaddr_interfaces'):
                 for ifsname, ifs in node.get('ip_interfaces').items():
                     if ifsname.startswith('lo'):
                         continue  # filter out local interface
@@ -225,6 +225,8 @@ def d42_insert(dev42, nodes, options, static_opt):
                             continue  # local loopbacks
                         if ip.lower().startswith('fe80'):
                             continue  # local loopbacks
+                        if ifsname not in node.get('hwaddr_interfaces'):
+                            continue
                         ipdata = {
                             'ipaddress': ip,
                             'tag': ifsname,
