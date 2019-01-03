@@ -281,6 +281,8 @@ def main():
     for node in salt_nodes:
         if not node:
             continue 
+        if type(salt_nodes[node]) != dict:
+            continue
         salt_nodes[node]['disks'] = local.cmd(node, 'disk.blkid')
         salt_nodes[node]['usage'] = local.cmd(node, 'disk.usage')
         salt_nodes[node]['cpus'] = local.cmd(node, 'status.cpuinfo')
