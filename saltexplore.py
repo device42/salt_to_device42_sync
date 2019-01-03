@@ -279,13 +279,16 @@ def main():
         logger.debug("Got %s nodes from file" % len(salt_nodes))
 
     for node in salt_nodes:
-        if not node:
-            continue 
-        if type(salt_nodes[node]) != dict:
-            continue
-        salt_nodes[node]['disks'] = local.cmd(node, 'disk.blkid')
-        salt_nodes[node]['usage'] = local.cmd(node, 'disk.usage')
-        salt_nodes[node]['cpus'] = local.cmd(node, 'status.cpuinfo')
+        try:
+            if not node:
+                continue 
+            if type(salt_nodes[node]) != dict:
+                continue
+            salt_nodes[node]['disks'] = local.cmd(node, 'disk.blkid')
+            salt_nodes[node]['usage'] = local.cmd(node, 'disk.usage')
+            salt_nodes[node]['cpus'] = local.cmd(node, 'status.cpuinfo')
+        except Exception as e:
+            logger.exception("Error (%s) getting device information %s" % (type(e), node))
 
     if args.savenodes:
         with open(args.savenodes, 'w') as wnf:
