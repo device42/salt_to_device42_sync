@@ -75,7 +75,7 @@ def d42_insert(dev42, nodes, options, static_opt):
     for node in [nodes[x] for x in nodes]:
         if not node:
             logger.debug("Skip node: no proper node data")
-            continue 
+            continue
         if 'nodename' not in node:
             logger.debug("Skip node: no name found")
             continue
@@ -127,10 +127,10 @@ def d42_insert(dev42, nodes, options, static_opt):
             if serial_no:
                 data.update({'serial_no': serial_no})
 
-            nodetype = None
+            nodetype = 'physical'
             virtual_subtype = None
             is_virtual = 'no'
-            if 'virtual' in node and node['virtual'] is not None:
+            if node['virtual'] != nodetype:
                 is_virtual = 'yes'
                 nodetype = 'virtual'
                 if 'virtual_subtype' in node:
@@ -280,7 +280,7 @@ def main():
     for node in salt_nodes:
         try:
             if not node:
-                continue 
+                continue
             if type(salt_nodes[node]) != dict:
                 continue
             salt_nodes[node]['disks'] = local.cmd(node, 'disk.blkid')
