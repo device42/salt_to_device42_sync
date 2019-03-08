@@ -133,8 +133,7 @@ def d42_insert(dev42, nodes, options, static_opt):
             if node['virtual'] != nodetype:
                 is_virtual = 'yes'
                 nodetype = 'virtual'
-                if 'virtual_subtype' in node:
-                    virtual_subtype = node['virtual_subtype']
+                virtual_subtype = node['virtual']
 
             if virtual_subtype is not None:
                 data.update({'virtual_subtype': virtual_subtype})
