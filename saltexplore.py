@@ -50,7 +50,7 @@ def get_config(cfgpath):
 
 class JSONEncoder(json.JSONEncoder):
     def default(self, o):
-        if isinstance(o, datetime):
+        if isinstance(o, datetime.date):
             return o.strftime("%Y %m %d %H:%M:%S")
         return json.JSONEncoder.default(self, o)
 
@@ -309,5 +309,5 @@ def main():
 
 if __name__ == "__main__":
     ret_val = main()
-    print 'Done'
+    print('Done')
     sys.exit(ret_val)
