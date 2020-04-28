@@ -4,6 +4,7 @@ certifi==2017.1.23
 futures==3.0.5
 Jinja2==2.9.4
 MarkupSafe==0.23
+msgpack==0.6.2
 msgpack-python==0.4.8
 packaging==16.8
 pycrypto==2.6.1
@@ -11,7 +12,7 @@ pyparsing==2.1.10
 PyYAML==3.12
 pyzmq==16.0.2
 requests==2.13.0
-salt==2016.11.1
+salt==3000.1
 singledispatch==3.4.0.3
 six==1.10.0
-tornado==4.4.2
+tornado==6.0.4

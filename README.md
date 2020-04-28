@@ -3,7 +3,13 @@ Script to sync Salt nodes information to Device42 (http://device42.com)
 This script was tested with Salt Master ( 2016.11.1 Carbon )
 
 # Requirements
-Take the file `settings.yaml.example` and rename it to `settings.yaml`. Then change the settings to correct ones.
+* Python 3.6.x +
+* Take the file `settings.yaml.example` and rename it to `settings.yaml`. Then change the settings to correct ones.
+* Install needed dependencies by running the following in the project directory
+
+```python
+pip3 install -r requirements.txt
+```
 
 # Salt Configure
 For proper connection minions certificate should be signed on salt master.
@@ -12,8 +18,13 @@ See [NodeFilter.md](./NodeFilter.md) for node filtering options.
 
 # Run
 ```
-python saltexplore.py [-c /path/to/settings.yaml]
+python3 saltexplore.py [-c /path/to/settings.yaml]
 ```
+
+# Notes
+Importing and using LocalClient must be done on the same machine as the Salt Master and it must be done using the same user that the Salt Master is running as.
+
+More information on the salt.client module can be found [here](https://docs.saltstack.com/en/latest/ref/clients/#localclient)
 
 # Command List
 ```
