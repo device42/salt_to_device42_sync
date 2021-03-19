@@ -2,7 +2,7 @@ appdirs==1.4.0
 backports-abc==0.5
 certifi==2017.1.23
 futures==3.0.5
-Jinja2==2.9.4
+Jinja2==2.11.3
 MarkupSafe==0.23
 msgpack-python==0.4.8
 packaging==16.8
