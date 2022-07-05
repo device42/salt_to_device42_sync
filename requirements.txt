@@ -11,7 +11,7 @@ pyparsing==2.1.10
 PyYAML==3.12
 pyzmq==16.0.2
 requests==2.13.0
-salt==2016.11.1
+salt==3003.5
 singledispatch==3.4.0.3
 six==1.10.0
 tornado==4.4.2
