@@ -1,6 +1,6 @@
 appdirs==1.4.0
 backports-abc==0.5
-certifi==2017.1.23
+certifi==2022.12.7
 futures==3.0.5
 Jinja2==2.9.4
 MarkupSafe==0.23
