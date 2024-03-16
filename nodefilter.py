@@ -15,14 +15,14 @@ def node_filter(ndata, filterlist):
         # getting real value from attribute
         for akey in apath:
             if not isinstance(aroot, dict) or akey not in aroot:
-                print("Attribute %s does not match: path not found" % flt['attribute'])
+                print(("Attribute %s does not match: path not found" % flt['attribute']))
                 # retval = retval and False
                 return False
             aroot = aroot[akey]
         # Here 'aroot' should contain target attribute
 
         wrong_op = False
-        if isinstance(aroot, basestring):
+        if isinstance(aroot, str):
             if oprt in ['iequal', 'ieq']:
                 retval = str(fval).lower() == aroot.lower()
             elif oprt in ['equal', 'eq']:
@@ -46,8 +46,8 @@ def node_filter(ndata, filterlist):
                     else:  # iin - case-insensitive 'in'
                         retval = any([True for v in fval if aroot.lower() == v.lower()])
                 else:
-                    print("Attribute %s: value of type %s does not support operator 'in', clause ignored" %
-                          (flt['attribute'], type(fval)))
+                    print(("Attribute %s: value of type %s does not support operator 'in', clause ignored" %
+                          (flt['attribute'], type(fval))))
                     continue
             else:
                 wrong_op = True
@@ -62,7 +62,7 @@ def node_filter(ndata, filterlist):
             else:
                 wrong_op = True
 
-        elif isinstance(aroot, (int, float, long)):
+        elif isinstance(aroot, (int, float)):
             if oprt in ['equal', 'eq']:
                 retval = fval == aroot
             elif oprt in ['greater', 'gt']:
@@ -76,12 +76,12 @@ def node_filter(ndata, filterlist):
             retval = aroot == fval
 
         else:
-            print("Not supported attribute type: %s" % (type(aroot)))
+            print(("Not supported attribute type: %s" % (type(aroot))))
             return False
 
         if wrong_op:
-            print("Unknown operator '%s' for attribute '%s' of type %s, ignore clause" %
-                  (oprt, flt['attribute'], type(aroot)))
+            print(("Unknown operator '%s' for attribute '%s' of type %s, ignore clause" %
+                  (oprt, flt['attribute'], type(aroot))))
             # return False
             continue
 

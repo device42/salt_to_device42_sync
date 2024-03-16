@@ -44,7 +44,7 @@ def get_config(cfgpath):
             raise ValueError("Config file %s is not found!" % cfgpath)
         cfgpath = os.path.join(CUR_DIR, cfgpath)
     with open(cfgpath, 'r') as cfgf:
-        config = yaml.load(cfgf.read())
+        config = yaml.load(cfgf.read(), Loader=yaml.SafeLoader)
     return config
 
 
@@ -205,7 +205,7 @@ def d42_insert(dev42, nodes, options, static_opt):
             updated_ips = []
 
             if node.get('hwaddr_interfaces'):
-                for ifsname, ifs in node.get('hwaddr_interfaces').items():
+                for ifsname, ifs in list(node.get('hwaddr_interfaces').items()):
                     if ifsname.startswith('lo'):
                         continue
 
@@ -215,7 +215,7 @@ def d42_insert(dev42, nodes, options, static_opt):
                     })
 
             if node.get('ip_interfaces') and node.get('hwaddr_interfaces'):
-                for ifsname, ifs in node.get('ip_interfaces').items():
+                for ifsname, ifs in list(node.get('ip_interfaces').items()):
                     if ifsname.startswith('lo') or ifsname.startswith('tun') or ifsname.startswith('tap'):
                         continue  # filter out local and tunnel
 
@@ -274,7 +274,7 @@ def main():
         salt_nodes = all_nodes[0]
         if args.onlynode:
             salt_nodes = {}
-            for key, node in all_nodes[0].items():
+            for key, node in list(all_nodes[0].items()):
                 if node.get('nodename') in args.onlynode[0] or node.get('fqdn') in args.onlynode[0]:
                     salt_nodes[key] = node
         logger.debug("Got %s nodes from file" % len(salt_nodes))
@@ -309,5 +309,5 @@ def main():
 
 if __name__ == "__main__":
     ret_val = main()
-    print 'Done'
+    print('Done')
     sys.exit(ret_val)

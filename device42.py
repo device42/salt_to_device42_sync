@@ -82,7 +82,7 @@ class Device42(object):
         known_fields += " customer contract_id contract"
         known_fields += " aliases subtype virtual_subtype notes tags"
         known_fields = atleast_fields + known_fields.split()
-        if not set(atleast_fields).intersection(kwargs.keys()):
+        if not set(atleast_fields).intersection(list(kwargs.keys())):
             raise Device42BadArgumentError("At least one parameter should be passed: %s" % atleast_fields)
         unknown_fields = set(kwargs.keys()) - set(known_fields)
         if unknown_fields:
