@@ -13,7 +13,7 @@ contextvars==2.4
 cryptography==42.0.5
 distro==1.9.0
 frozenlist==1.4.1
-idna==3.6
+idna==3.7
 immutables==0.20
 importlib_metadata==7.0.2
 inflect==7.0.0
