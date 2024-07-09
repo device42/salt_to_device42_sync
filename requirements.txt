@@ -53,4 +53,4 @@ typing_extensions==4.10.0
 urllib3==2.2.1
 yarl==1.9.4
 zc.lockfile==3.0.post1
-zipp==3.18.1
+zipp==3.19.1
